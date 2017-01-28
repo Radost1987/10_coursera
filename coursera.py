@@ -9,8 +9,8 @@ from openpyxl import Workbook
 def get_courses_list():
     courses_list = []
     base_url = 'https://www.coursera.org/sitemap~www~courses.xml'
-    response = requests.get(base_url)
-    xml = response.content.translate(None, b'\n')
+    base_url_content = requests.get(base_url)
+    xml_content = response.content.translate(None, b'\n')
     context = etree.iterparse(BytesIO(xml))
     for action, elem in context:
         if elem.text != ' ' and elem.text is not None:
