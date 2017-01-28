@@ -10,9 +10,9 @@ def get_courses_list():
     courses_list = []
     base_url = 'https://www.coursera.org/sitemap~www~courses.xml'
     base_url_content = requests.get(base_url)
-    xml_content = response.content.translate(None, b'\n')
-    context = etree.iterparse(BytesIO(xml))
-    for action, elem in context:
+    xml_content = base_url_content.content.translate(None, b'\n')
+    content_of_parse = etree.iterparse(BytesIO(xml_content))
+    for action, elem in content_of_parse:
         if elem.text != ' ' and elem.text is not None:
              courses_list.append(elem.text)
     return courses_list          
