@@ -12,9 +12,9 @@ def get_courses_list():
     base_url_content = requests.get(base_url)
     xml_content = base_url_content.content.translate(None, b'\n')
     content_of_parse = etree.iterparse(BytesIO(xml_content))
-    for action, elem in content_of_parse:
-        if elem.text != ' ' and elem.text is not None:
-             courses_list.append(elem.text)
+    for action, element in content_of_parse:
+        if element.text != ' ' and element.text is not None:
+             courses_list.append(element.text)
     return courses_list          
 
 
@@ -43,12 +43,12 @@ def get_course_info(selected_courses):
 
 
 def output_courses_info_to_xlsx(filepath, courses_info):
-    book = Workbook()
-    sheet = book.active
-    sheet.append(['URL', 'Title', 'Start date', 'Language', 'Rating'])
+    xlsx_book = Workbook()
+    courses_info_sheet = xlsx_book.active
+    courses_info_sheet.append(['URL', 'Title', 'Start date', 'Language', 'Rating'])
     for course in courses_info:
-        sheet.append(course)
-    book.save('{}/courses.xlsx'.format(filepath))
+        courses_info_sheet.append(course)
+    xlsx_book.save('{}/courses.xlsx'.format(filepath))
 
 
 if __name__ == '__main__':
