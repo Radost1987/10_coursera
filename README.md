@@ -13,6 +13,8 @@ requests==2.11.1
 openpyxl==2.3.5
 
 beautifulsoup4==4.5.1
+ 
+lxml==3.7.3
 
 ### Getting started
 
